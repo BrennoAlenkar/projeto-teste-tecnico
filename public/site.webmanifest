@@ -1,0 +1,17 @@
+{
+  "name": "Super Promoção 2025",
+  "short_name": "Promoção 2025",
+  "description": "A maior promoção do ano! Concorra a carros, dinheiro e muito mais!",
+  "theme_color": "#1e3a8a",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
