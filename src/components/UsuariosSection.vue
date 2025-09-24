@@ -163,6 +163,7 @@ const users = ref<User[]>([])
 const showEditModal = ref(false)
 const showDeleteModal = ref(false)
 const editingUser = ref<User>({ nome: '', email: '', telefone: '', cpf: '', senha: '' })
+const originalEmail = ref('')
 const userToDelete = ref<User | null>(null)
 
 const loadUsers = () => {
@@ -182,17 +183,19 @@ const formatCpf = (cpf: string) => {
 
 const editUser = (user: User) => {
   editingUser.value = { ...user }
+  originalEmail.value = user.email
   showEditModal.value = true
 }
 
 const closeEditModal = () => {
   showEditModal.value = false
   editingUser.value = { nome: '', email: '', telefone: '', cpf: '', senha: '' }
+  originalEmail.value = ''
 }
 
 const saveUser = () => {
   try {
-    const userIndex = users.value.findIndex(u => u.email === editingUser.value.email)
+    const userIndex = users.value.findIndex(u => u.email === originalEmail.value)
     if (userIndex !== -1) {
       users.value[userIndex] = { ...editingUser.value }
       localStorage.setItem('registered_users', JSON.stringify(users.value))
@@ -201,7 +204,7 @@ const saveUser = () => {
       const currentUser = localStorage.getItem('currentUser')
       if (currentUser) {
         const current = JSON.parse(currentUser)
-        if (current.email === editingUser.value.email) {
+        if (current.email === originalEmail.value) {
           localStorage.setItem('currentUser', JSON.stringify(editingUser.value))
         }
       }
@@ -255,9 +258,9 @@ onMounted(() => {
 
 <style scoped>
 .usuarios-section {
-  padding: 80px 0;
+  padding: 40px 0 60px;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  min-height: 80vh;
+  min-height: auto;
 }
 
 .container {
