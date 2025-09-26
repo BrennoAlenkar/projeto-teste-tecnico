@@ -5,7 +5,6 @@
         ref="titleRef" 
         :class="['section-title', { 'reveal-active': isTitleVisible }]"
       >
-        <span class="title-icon">📋</span>
         Como Participar
       </h2>
       <p 
@@ -97,15 +96,15 @@
       <div class="cta-section">
         <h3>Pronto para participar?</h3>
         <div class="cta-buttons">
-          <button class="btn btn-primary">
-            📱 Baixar App Oficial
+          <button class="btn btn-primary" @click="mostrarDownloadApp">
+            Baixar App Oficial
           </button>
-          <button class="btn btn-secondary">
-            🏪 Encontrar Lojas
+          <button class="btn btn-secondary" @click="scrollToLojas">
+            Encontrar Lojas
           </button>
-          <button class="btn btn-outline">
-            📄 Ler Regulamento Completo
-          </button>
+          <router-link to="/regulamento" class="btn btn-outline">
+            Ler Regulamento Completo
+          </router-link>
         </div>
       </div>
     </div>
@@ -175,6 +174,32 @@ const steps = ref<Step[]>([
     ]
   }
 ])
+
+const mostrarDownloadApp = () => {
+  const mensagem = `App em Desenvolvimento!\n\n` +
+                  `O aplicativo oficial da Super Promoção 2025 está sendo desenvolvido e estará disponível em breve.\n\n` +
+                  `Enquanto isso, você pode:\n` +
+                  `• Verificar as lojas participantes\n` +
+                  `• Ler o regulamento completo\n` +
+                  `• Acompanhar os ganhadores\n\n` +
+                  `Em breve nas lojas: App Store e Google Play`
+  
+  alert(mensagem)
+}
+
+const scrollToLojas = () => {
+  const element = document.getElementById('lojas')
+  if (element) {
+    const headerOffset = 90
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
 </script>
 
 <style scoped>

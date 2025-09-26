@@ -1,5 +1,5 @@
 <template>
-  <section class="lojas-section">
+  <section id="lojas" class="lojas-section">
     <div class="container">
       <h2 class="section-title">
         <span class="title-icon">🏪</span>
@@ -219,33 +219,33 @@ const mostrarApenasPróximas = ref(false)
 const lojas = ref<Loja[]>([
   {
     id: 1,
-    nome: 'Supermercado Bom Preço',
+    nome: 'Mart & Cia',
     cnpj: '12345678000195',
     estado: 'SP',
     cidade: 'São Paulo',
-    endereco: 'Rua das Flores, 123 - Centro',
+    endereco: 'R. Santos Dumont, 482 - Vila Mariana',
     x: 65,
     y: 85,
-    telefone: '(11) 3000-1234'
+    telefone: '(11) 2847-1930'
   },
   {
     id: 2,
-    nome: 'Hipermercado Economia',
+    nome: 'SuperCompras',
     cnpj: '98765432000187',
     estado: 'RJ',
     cidade: 'Niterói',
-    endereco: 'Av. Principal, 456 - Boa Viagem',
+    endereco: 'Av. Ernani do Amaral, 1205 - Centro',
     x: 78,
     y: 82,
-    telefone: '(21) 3000-5678'
+    telefone: '(21) 3719-0562'
   },
   {
     id: 3,
-    nome: 'Mercado da Esquina',
+    nome: 'Mercadinho do João',
     cnpj: '11122233000144',
     estado: 'MG',
     cidade: 'Uberlândia',
-    endereco: 'Praça da Liberdade, 789 - Bairro Novo',
+    endereco: 'R. Barão de Camargos, 318 - Centro',
     x: 70,
     y: 78,
     telefone: '(34) 3000-9012'

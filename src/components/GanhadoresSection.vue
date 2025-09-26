@@ -1,8 +1,7 @@
 <template>
-  <section class="ganhadores-section">
+  <section id="ganhadores" class="ganhadores-section">
     <div class="container">
       <h2 class="section-title">
-        <span class="title-icon">🏆</span>
         Nossos Ganhadores
       </h2>
       <p class="section-subtitle">
@@ -12,17 +11,14 @@
       <!-- Estatísticas dos Ganhadores -->
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-icon">👥</div>
           <div class="stat-number">{{ totalGanhadores }}</div>
           <div class="stat-label">Ganhadores</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🌟</div>
           <div class="stat-number">{{ estadosComGanhadores }}</div>
           <div class="stat-label">Estados</div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">💰</div>
           <div class="stat-number">{{ valorTotalPremios }}</div>
           <div class="stat-label">Distribuídos</div>
         </div>
@@ -32,7 +28,7 @@
       <div class="ganhadores-content">
         <!-- Mapa do Brasil -->
         <div class="mapa-container">
-          <h3>🗺️ Ganhadores por Estado</h3>
+          <h3>Ganhadores por Estado</h3>
           <div class="mapa-brasil">
             <div class="mapa-tooltip" v-if="hoveredEstado" :style="tooltipStyle">
               <strong>{{ hoveredEstado.nome }}</strong><br>
@@ -198,23 +194,19 @@ const itensPorPagina = 10
 const hoveredEstado = ref<Estado | null>(null)
 const tooltipStyle = ref({})
 
-// Dados de exemplo dos ganhadores
 const ganhadores = ref<Ganhador[]>([
-  { id: 1, nome: 'Maria Silva Santos', estado: 'SP', cidade: 'São Paulo', premio: 'Smart TV 50 polegadas', data: '2024-08-15' },
-  { id: 2, nome: 'João Pedro Santos', estado: 'RJ', cidade: 'Rio de Janeiro', premio: 'iPhone 15 Pro Max', data: '2024-08-16' },
-  { id: 3, nome: 'Ana Costa Ferreira', estado: 'MG', cidade: 'Belo Horizonte', premio: 'Viagem para Dubai', data: '2024-08-17' },
-  { id: 4, nome: 'Pedro Almeida Silva', estado: 'SP', cidade: 'Campinas', premio: 'Honda Civic', data: '2024-08-18' },
-  { id: 5, nome: 'Carla Oliveira Lima', estado: 'RJ', cidade: 'Niterói', premio: 'R$ 50.000', data: '2024-08-19' },
-  { id: 6, nome: 'Roberto Carlos Mendes', estado: 'RS', cidade: 'Porto Alegre', premio: 'Smart TV 75 OLED', data: '2024-08-20' },
-  { id: 7, nome: 'Fernanda Souza Costa', estado: 'PR', cidade: 'Curitiba', premio: 'Viagem Europa', data: '2024-08-21' },
-  { id: 8, nome: 'Lucas Martins Pereira', estado: 'SC', cidade: 'Florianópolis', premio: 'Notebook Gamer', data: '2024-08-22' },
-  { id: 9, nome: 'Juliana Santos Lima', estado: 'BA', cidade: 'Salvador', premio: 'Conjunto de Móveis', data: '2024-08-23' },
-  { id: 10, nome: 'Eduardo Ferreira Costa', estado: 'PE', cidade: 'Recife', premio: 'Smartphone Samsung', data: '2024-08-24' },
-  { id: 11, nome: 'Patricia Lima Santos', estado: 'CE', cidade: 'Fortaleza', premio: 'Tablet iPad', data: '2024-08-25' },
-  { id: 12, nome: 'Marcos Antonio Silva', estado: 'GO', cidade: 'Goiânia', premio: 'Console PlayStation', data: '2024-08-26' },
-  { id: 13, nome: 'Leticia Oliveira Souza', estado: 'DF', cidade: 'Brasília', premio: 'Smart TV 65 polegadas', data: '2024-08-27' },
-  { id: 14, nome: 'Gabriel Santos Costa', estado: 'MT', cidade: 'Cuiabá', premio: 'Bicicleta Elétrica', data: '2024-08-28' },
-  { id: 15, nome: 'Amanda Ferreira Lima', estado: 'ES', cidade: 'Vitória', premio: 'R$ 25.000', data: '2024-08-29' }
+  { id: 1, nome: 'Maria S.', estado: 'SP', cidade: 'São Paulo', premio: 'Smart TV 65" 4K', data: '2024-08-15' },
+  { id: 2, nome: 'João P.', estado: 'RJ', cidade: 'Rio de Janeiro', premio: 'Smartphone Galaxy', data: '2024-08-16' },
+  { id: 3, nome: 'Ana C.', estado: 'MG', cidade: 'Belo Horizonte', premio: 'Vale Viagem R$ 5.000', data: '2024-08-17' },
+  { id: 4, nome: 'Pedro A.', estado: 'SP', cidade: 'Campinas', premio: 'Moto Honda CB 250F', data: '2024-08-18' },
+  { id: 5, nome: 'Carla O.', estado: 'RJ', cidade: 'Niterói', premio: 'R$ 10.000 em Dinheiro', data: '2024-08-19' },
+  { id: 6, nome: 'Roberto M.', estado: 'RS', cidade: 'Porto Alegre', premio: 'Smart TV 65" 4K', data: '2024-08-20' },
+  { id: 7, nome: 'Fernanda S.', estado: 'PR', cidade: 'Curitiba', premio: 'Vale Viagem R$ 5.000', data: '2024-08-21' },
+  { id: 8, nome: 'Lucas M.', estado: 'SC', cidade: 'Florianópolis', premio: 'Smartphone Galaxy', data: '2024-08-22' },
+  { id: 9, nome: 'Juliana L.', estado: 'BA', cidade: 'Salvador', premio: 'R$ 10.000 em Dinheiro', data: '2024-08-23' },
+  { id: 10, nome: 'Eduardo C.', estado: 'PE', cidade: 'Recife', premio: 'Smartphone Galaxy', data: '2024-08-24' },
+  { id: 11, nome: 'Patricia S.', estado: 'CE', cidade: 'Fortaleza', premio: 'Smart TV 65" 4K', data: '2024-08-25' },
+  { id: 12, nome: 'Marcos A.', estado: 'GO', cidade: 'Goiânia', premio: 'Vale Viagem R$ 5.000', data: '2024-08-26' }
 ])
 
 const estadosBrasil = ref<Estado[]>([

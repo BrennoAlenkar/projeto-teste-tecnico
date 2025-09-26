@@ -1,33 +1,20 @@
-# 🎉 Super Promoção 2025 - Aplicação Fullstack
+# Super Promoção 2025
 
-> **Desafio Técnico: Desenvolvedor Fullstack Pleno**  
-> Uma aplicação completa desenvolvida com **Vue.js 3**, **TypeScript**, **Node.js**, **Express** e **MongoDB**
+Aplicação web para campanha promocional desenvolvida com Vue.js 3 e Node.js.
 
-![Vue.js](https://img.shields.io/badge/Vue.js-3.4.0-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-18.0.0-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-7.0.0-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Express](https://img.shields.io/badge/Express-4.18.0-000000?style=for-the-badge&logo=express&logoColor=white)
+## Tecnologias
 
-## 🚀 Visão Geral
+- **Frontend**: Vue.js 3, TypeScript, Vite
+- **Backend**: Node.js, Express, MongoDB  
+- **Estilo**: CSS customizado
 
-A **Super Promoção 2025** é uma aplicação fullstack completa que simula uma campanha promocional de grande marca, oferecendo mais de **R$ 1 milhão** em prêmios. O projeto demonstra habilidades fullstack através de uma solução moderna, escalável e otimizada.
+## Funcionalidades
 
-### ✨ **Arquitetura Fullstack**
-
-#### **🎨 Frontend (Vue.js 3 + TypeScript)**
-- **Single Page Application (SPA)** responsiva
-- **Composition API** com TypeScript
-- **Vite** para build otimizado e desenvolvimento rápido
-- **Mapas interativos** para ganhadores e lojas
-- **Geolocalização** via navegador
-- **SEO otimizado** com meta tags e Schema.org
-
-#### **🔧 Backend (Node.js + Express + MongoDB)**
-- **API REST** robusta com documentação Swagger
-- **CRUD completo** para ganhadores e lojas
-- **Geolocalização** e cálculo de distâncias
-- **Agregações** por estado e região
+- Interface responsiva para promoção
+- Sistema de autenticação
+- Painel administrativo
+- API REST para backend
+- Dados de ganhadores e lojas
 - **Validação robusta** e tratamento de erros
 - **Rate limiting** e middleware de segurança
 

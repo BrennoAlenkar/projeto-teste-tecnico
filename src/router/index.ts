@@ -4,6 +4,7 @@ import type { RouteRecordRaw } from 'vue-router'
 // Lazy loading das páginas para melhor performance
 const HomePage = () => import('../views/HomePage.vue')
 const AdminPage = () => import('../views/AdminPage.vue')
+const RegulamentoPage = () => import('../views/RegulamentoPage.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +26,15 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true
     }
   },
+  {
+    path: '/regulamento',
+    name: 'Regulamento',
+    component: RegulamentoPage,
+    meta: {
+      title: 'Regulamento - Super Promoção 2025',
+      description: 'Regulamento oficial da Super Promoção 2025'
+    }
+  },
   // Redirecionamento para /admin/usuarios -> /admin
   {
     path: '/admin/usuarios',
@@ -40,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else if (to.hash) {
@@ -55,7 +65,7 @@ const router = createRouter({
 })
 
 // Guard para rotas que requerem autenticação
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // Atualizar título da página
   if (to.meta.title) {
     document.title = to.meta.title as string

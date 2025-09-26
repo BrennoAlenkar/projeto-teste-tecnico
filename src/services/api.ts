@@ -1,4 +1,3 @@
-// Configuração base da API
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1'
 
 interface ApiResponse<T> {
@@ -60,24 +59,9 @@ class ApiService {
       ...options,
     }
 
-    console.log('🚀 API Request:', {
-      url,
-      method: config.method || 'GET',
-      headers: config.headers,
-      body: options.body
-    })
-
     try {
       const response = await fetch(url, config)
-      console.log('📡 API Response:', {
-        status: response.status,
-        statusText: response.statusText,
-        ok: response.ok,
-        url: response.url
-      })
-
       const data = await response.json()
-      console.log('📦 API Data:', data)
       
       if (!response.ok) {
         throw new Error(data.message || 'Erro na requisição')
@@ -85,7 +69,7 @@ class ApiService {
       
       return data
     } catch (error) {
-      console.error('❌ API Error:', error)
+      console.error('API Error:', error)
       throw error
     }
   }

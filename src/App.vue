@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
 import BackToTop from './components/BackToTop.vue'
 import AuthModal from './components/AuthModal.vue'
 
 const route = useRoute()
+const router = useRouter()
 const activeSection = ref('home')
 const isAuthenticated = ref(false)
 const currentUser = ref(null)
@@ -14,12 +15,24 @@ const showAuthModal = ref(false)
 // Computed para verificar se estamos na página admin
 const isAdminPage = computed(() => route.path.startsWith('/admin'))
 
-// Função para scroll nas seções (apenas para a home page)
-const scrollToSection = (section: string) => {
-  if (isAdminPage.value) return
-  
+// Função para scroll nas seções
+const scrollToSection = async (section: string) => {
   activeSection.value = section
   
+  // Se não estivermos na home page, navegar para lá primeiro
+  if (route.path !== '/') {
+    await router.push('/')
+    // Aguardar um momento para a página carregar completamente
+    setTimeout(() => {
+      scrollToElement(section)
+    }, 100)
+  } else {
+    scrollToElement(section)
+  }
+}
+
+// Função auxiliar para fazer o scroll para o elemento
+const scrollToElement = (section: string) => {
   const element = document.getElementById(section)
   if (element) {
     const headerOffset = 90
@@ -53,6 +66,23 @@ const handleLogout = () => {
   localStorage.removeItem('currentUser')
 }
 
+// Função para detectar seção ativa durante o scroll
+const updateActiveSection = () => {
+  if (route.path !== '/') return
+  
+  const sections: string[] = ['home', 'como-participar', 'premios', 'faq', 'ganhadores', 'lojas']
+  const scrollPosition = window.scrollY + 100
+  
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const sectionId = sections[i]!
+    const section = document.getElementById(sectionId)
+    if (section && section.offsetTop <= scrollPosition) {
+      activeSection.value = sectionId
+      break
+    }
+  }
+}
+
 // Verificar autenticação ao montar
 onMounted(() => {
   const savedUser = localStorage.getItem('currentUser')
@@ -64,6 +94,14 @@ onMounted(() => {
       console.warn('Erro ao carregar usuário atual:', error)
     }
   }
+  
+  // Adicionar listener para scroll
+  window.addEventListener('scroll', updateActiveSection)
+})
+
+// Limpar listener ao desmontar
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateActiveSection)
 })
 </script>
 
@@ -104,7 +142,7 @@ onMounted(() => {
           <div class="footer-section">
             <h4>Links Úteis</h4>
             <ul>
-              <li><a href="#regulamento">Regulamento</a></li>
+              <li><router-link to="/regulamento">Regulamento</router-link></li>
               <li><a href="#termos">Termos de Uso</a></li>
               <li><a href="#privacidade">Política de Privacidade</a></li>
             </ul>

@@ -1,5 +1,5 @@
 <template>
-  <section class="home-section">
+  <section id="home" class="home-section">
     <div class="hero">
       <div class="hero-animation">
         <div class="floating-prize">🎁</div>
@@ -18,7 +18,7 @@
         </p>
         
         <div class="countdown-container">
-          <h3>⏰ Promoção válida até:</h3>
+          <h3>Promoção válida até:</h3>
           <div class="countdown">
             <div class="countdown-item">
               <span class="countdown-number">{{ countdown.days }}</span>
@@ -40,12 +40,12 @@
         </div>
         
         <div class="hero-actions">
-          <button class="btn btn-primary pulse-animation">
-            🎯 PARTICIPAR AGORA
+          <button class="btn btn-primary pulse-animation" @click="scrollToParticipacao">
+            PARTICIPAR AGORA
           </button>
-          <button class="btn btn-secondary">
-            📋 Ver Regulamento
-          </button>
+          <router-link to="/regulamento" class="btn btn-secondary">
+            Ver Regulamento
+          </router-link>
         </div>
       </div>
     </div>
@@ -114,6 +114,20 @@ const updateCountdown = () => {
   } else {
     // promoção expirada
     countdown.value = { days: 0, hours: 0, minutes: 0, seconds: 0 }
+  }
+}
+
+const scrollToParticipacao = () => {
+  const element = document.getElementById('como-participar')
+  if (element) {
+    const headerOffset = 90
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
   }
 }
 

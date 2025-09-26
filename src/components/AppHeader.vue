@@ -2,7 +2,7 @@
   <header class="app-header" :class="{ scrolled: isScrolled }">
     <nav class="navbar">
       <div class="nav-brand">
-        <h1>🎉 SUPER PROMOÇÃO 2025</h1>
+        <h1>SUPER PROMOÇÃO 2025</h1>
       </div>
       
       <ul class="nav-menu" :class="{ 'nav-menu-open': mobileMenuOpen }">
@@ -16,10 +16,19 @@
              :class="{ active: activeSection === 'como-participar' }"
              @click="navigateToSection('como-participar')">Como Participar</a>
         </li>
-        <li class="nav-item">
-          <a href="#premios" class="nav-link" 
+        <li class="nav-item dropdown" @mouseleave="closeDropdown">
+          <a href="#premios" class="nav-link dropdown-toggle" 
              :class="{ active: activeSection === 'premios' }"
-             @click="navigateToSection('premios')">Prêmios</a>
+             @click="navigateToSection('premios')"
+             @mouseenter="openDropdown">
+            Prêmios <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu" :class="{ 'dropdown-open': dropdownOpen }">
+            <li><a href="#premios-principais" @click="navigateToSection('premios')" class="dropdown-link">Prêmios Principais</a></li>
+            <li><a href="#premios-mensais" @click="navigateToSection('premios')" class="dropdown-link">Prêmios Mensais</a></li>
+            <li><a href="#premios-instantaneos" @click="navigateToSection('premios')" class="dropdown-link">Prêmios Instantâneos</a></li>
+            <li><a href="#historico-premios" @click="navigateToSection('premios')" class="dropdown-link">Histórico</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a href="#faq" class="nav-link" 
@@ -38,13 +47,13 @@
         </li>
         <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/admin" class="nav-link nav-link-admin">
-            👥 Usuários
+            Usuários
           </router-link>
         </li>
         
         <li class="nav-item nav-cta" v-if="!isAuthenticated">
           <button class="btn-cadastro" @click="$emit('show-auth')">
-            👤 Entrar
+            Entrar
           </button>
         </li>
         
@@ -52,7 +61,7 @@
           <div class="user-menu">
             <span class="user-name">Olá, {{ user?.nome?.split(' ')[0] }}!</span>
             <button class="btn-logout" @click="$emit('logout')">
-              🚪 Sair
+              Sair
             </button>
           </div>
         </li>
@@ -89,6 +98,7 @@ const emit = defineEmits<Emits>()
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
+const dropdownOpen = ref(false)
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
@@ -98,9 +108,18 @@ const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
+const openDropdown = () => {
+  dropdownOpen.value = true
+}
+
+const closeDropdown = () => {
+  dropdownOpen.value = false
+}
+
 const navigateToSection = (section: string) => {
   emit('navigate', section)
   mobileMenuOpen.value = false
+  dropdownOpen.value = false
 }
 
 onMounted(() => {
@@ -122,30 +141,32 @@ onUnmounted(() => {
   background: var(--gradient-primary);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 20px rgba(30, 58, 138, 0.1);
+  box-shadow: none;
+  border-bottom: none;
 }
 
 .app-header.scrolled {
   background: rgba(30, 58, 138, 0.95);
   backdrop-filter: blur(15px);
-  box-shadow: 0 2px 30px rgba(30, 58, 138, 0.2);
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.15);
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 1.2rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .nav-brand h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: white;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
 }
 
 .nav-menu {
@@ -166,22 +187,44 @@ onUnmounted(() => {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.5rem 0.8rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  padding: 0.2rem 0.6rem;
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
   white-space: nowrap;
+  position: relative;
+  display: block;
+  line-height: 1.2;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffffff, #e8f4fd);
+  transition: width 0.4s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  color: #e8f4fd;
+}
+
+.nav-link.active::after,
+.nav-link.router-link-active::after {
+  width: 100%;
+  background: linear-gradient(90deg, #ffffff, #60a5fa);
+  height: 3px;
 }
 
 .nav-link.active,
 .nav-link.router-link-active {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .nav-link-admin {
@@ -189,8 +232,78 @@ onUnmounted(() => {
   font-weight: 700;
 }
 
+.nav-link-admin::after {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b) !important;
+}
+
 .nav-link-admin:hover {
-  background: rgba(251, 191, 36, 0.1);
+  color: #fde68a !important;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(30, 58, 138, 0.98);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0;
+  margin: 0;
+  list-style: none;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1002;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu.dropdown-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8f4fd;
+  padding-left: 1.2rem;
 }
 
 .nav-cta .btn-cadastro {
@@ -323,6 +436,11 @@ onUnmounted(() => {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     display: flex;
+  }
+  
+  .nav-link {
+    text-align: center;
+    padding: 1rem 0.8rem;
   }
   
   .nav-menu.nav-menu-open {

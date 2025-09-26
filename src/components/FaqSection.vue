@@ -1,8 +1,7 @@
 <template>
-  <section class="faq-section">
+  <section id="faq" class="faq-section">
     <div class="container">
       <h2 class="section-title">
-        <span class="title-icon">❓</span>
         Perguntas Frequentes
       </h2>
       <p class="section-subtitle">
@@ -14,7 +13,7 @@
           <input 
             type="text" 
             v-model="searchQuery" 
-            placeholder="🔍 Buscar pergunta..."
+            placeholder="Buscar pergunta..."
             class="search-input"
           >
           <div class="search-results-count" v-if="searchQuery">

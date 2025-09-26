@@ -110,7 +110,7 @@
             
             <button type="submit" class="btn-primary" :disabled="isLoading || !acceptTerms">
               <span v-if="isLoading">Cadastrando...</span>
-              <span v-else">👤 Criar Conta</span>
+              <span v-else>Criar Conta</span>
             </button>
           </form>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <section class="premios-section">
+  <section id="premios" class="premios-section">
     <div class="container">
       <h2 
         ref="titleRef" 
@@ -170,53 +170,53 @@ const categorias = ref<Categoria[]>([
 const premios = ref<Premio[]>([
   {
     id: 1,
-    nome: 'Smart TV 75" OLED',
-    valor: 'R$ 15.000',
-    descricao: 'TV Premium com tecnologia OLED e resolução 4K',
-    descricaoCompleta: 'Smart TV 75 polegadas com tecnologia OLED, resolução 4K Ultra HD, HDR, sistema operacional Android TV, controle por voz e design ultrafino.',
+    nome: 'Smart TV 65" 4K',
+    valor: 'R$ 3.200',
+    descricao: 'Smart TV LED 4K com Wi-Fi',
+    descricaoCompleta: 'Smart TV LED 65 polegadas 4K, sistema Smart com Wi-Fi, HDR, 3 HDMI, 2 USB.',
     icon: '📺',
     categoria: 'eletronicos',
-    quantidade: 50
+    quantidade: 15
   },
   {
     id: 2,
-    nome: 'iPhone 15 Pro Max',
-    valor: 'R$ 12.000',
-    descricao: 'Smartphone Apple mais avançado',
-    descricaoCompleta: 'iPhone 15 Pro Max com chip A17 Pro, câmera profissional de 48MP, tela Super Retina XDR de 6,7", 256GB de armazenamento.',
+    nome: 'Smartphone Galaxy',
+    valor: 'R$ 1.800',
+    descricao: 'Samsung Galaxy A54 128GB',
+    descricaoCompleta: 'Samsung Galaxy A54 5G, 128GB, câmera tripla 50MP, tela 6.4", bateria 5000mAh.',
     icon: '📱',
     categoria: 'eletronicos',
-    quantidade: 100
+    quantidade: 25
   },
   {
     id: 3,
-    nome: 'Viagem para Dubai',
-    valor: 'R$ 25.000',
-    descricao: 'Pacote completo para 2 pessoas por 7 dias',
-    descricaoCompleta: 'Viagem completa para Dubai com passagens aéreas, hotel 5 estrelas, café da manhã, passeios turísticos e seguro viagem para 2 pessoas.',
+    nome: 'Vale Viagem R$ 5.000',
+    valor: 'R$ 5.000',
+    descricao: 'Vale para agência de viagens',
+    descricaoCompleta: 'Vale viagem no valor de R$ 5.000 para usar em qualquer agência parceira, válido por 12 meses.',
     icon: '✈️',
     categoria: 'viagens',
-    quantidade: 10
+    quantidade: 8
   },
   {
     id: 4,
-    nome: 'Honda Civic',
-    valor: 'R$ 120.000',
-    descricao: 'Sedan Honda Civic 0km completo',
-    descricaoCompleta: 'Honda Civic sedan 0km, versão EXL com motor 2.0, câmbio CVT, bancos em couro, central multimídia, sistema de segurança Honda Sensing.',
-    icon: '🚗',
-    categoria: 'carros',
-    quantidade: 5
+    nome: 'Moto Honda CB 250F',
+    valor: 'R$ 18.000',
+    descricao: 'Moto Honda 0km',
+    descricaoCompleta: 'Honda CB 250F Twister 0km, freios CBS, painel digital, garantia de fábrica.',
+    icon: '🏍️',
+    categoria: 'veiculos',
+    quantidade: 3
   },
   {
     id: 5,
-    nome: 'R$ 50.000 em Dinheiro',
-    valor: 'R$ 50.000',
-    descricao: 'Valor depositado na sua conta',
-    descricaoCompleta: 'Prêmio em dinheiro no valor de R$ 50.000,00 que será depositado diretamente na conta corrente do ganhador em até 30 dias úteis.',
+    nome: 'R$ 10.000 em Dinheiro',
+    valor: 'R$ 10.000',
+    descricao: 'Dinheiro na conta',
+    descricaoCompleta: 'Prêmio em dinheiro de R$ 10.000 depositado na conta em até 15 dias úteis.',
     icon: '💰',
     categoria: 'dinheiro',
-    quantidade: 20
+    quantidade: 12
   },
   {
     id: 6,
