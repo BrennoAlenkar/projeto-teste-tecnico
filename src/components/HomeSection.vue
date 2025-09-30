@@ -154,7 +154,9 @@ onUnmounted(() => {
   position: relative;
   text-align: center;
   padding: 6rem 2rem 4rem;
-  background: linear-gradient(135deg, #434343 0%, #000000 100%);
+  background: linear-gradient(45deg, #434343, #000000, #1a1a1a, #2d2d2d);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
   color: white;
   min-height: 80vh;
   display: flex;
@@ -163,8 +165,11 @@ onUnmounted(() => {
 }
 
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 25%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 75%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-animation {
@@ -180,22 +185,33 @@ onUnmounted(() => {
 .floating-prize {
   position: absolute;
   font-size: 3rem;
-  opacity: 0.7;
+  opacity: 0.6;
+  animation: floatSoft 8s ease-in-out infinite;
 }
 
 .floating-prize:nth-child(1) {
   top: 10%;
   left: 10%;
+  animation-delay: 0s;
 }
 
 .floating-prize:nth-child(2) {
   top: 20%;
   right: 15%;
+  animation-delay: 2.5s;
 }
 
 .floating-prize:nth-child(3) {
   bottom: 30%;
   left: 20%;
+  animation-delay: 5s;
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  25% { transform: translateY(-15px) rotate(2deg); opacity: 0.8; }
+  50% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+  75% { transform: translateY(8px) rotate(-2deg); opacity: 0.7; }
 }
 
 .hero-content {
@@ -205,9 +221,11 @@ onUnmounted(() => {
 }
 
 .hero-title {
+  font-family: 'Poppins', 'Inter', sans-serif;
   font-size: 4rem;
   margin-bottom: 1.5rem;
   font-weight: 900;
+  letter-spacing: -0.03em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -228,9 +246,12 @@ onUnmounted(() => {
 }
 
 .year {
+  font-family: 'Poppins', 'Inter', sans-serif;
   font-size: 5rem;
+  font-weight: 900;
   color: white;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.04em;
 }
 
 .hero-subtitle {
@@ -272,10 +293,12 @@ onUnmounted(() => {
 }
 
 .countdown-number {
+  font-family: 'Poppins', monospace;
   font-size: 2.5rem;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1;
   margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .countdown-label {
@@ -293,15 +316,16 @@ onUnmounted(() => {
 }
 
 .btn {
+  font-family: 'Poppins', 'Inter', sans-serif;
   padding: 1rem 2.5rem;
   border: none;
   border-radius: 50px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary {
@@ -394,9 +418,11 @@ onUnmounted(() => {
 /* .rotating: Removed continuous rotation animation for better performance */
 
 .highlight-card h3 {
+  font-family: 'Poppins', 'Inter', sans-serif;
   font-size: 2rem;
   margin-bottom: 0.5rem;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .highlight-card p {

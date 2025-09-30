@@ -221,6 +221,28 @@ body {
   color: var(--neutral-dark);
 }
 
+/* Tipografia Comercial Hierárquica */
+h1, h2, h3, .hero-title, .section-title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-title {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.btn, .nav-link, .highlight-card h3 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.countdown-number {
+  font-family: 'Poppins', monospace;
+  font-weight: 800;
+}
+
 #app {
   min-height: 100vh;
   display: flex;
