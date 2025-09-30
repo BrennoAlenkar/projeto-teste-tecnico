@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header" :class="{ scrolled: isScrolled }">
+  <header class="app-header" :class="{ scrolled: isScrolled, hidden: isHidden }">
     <nav class="navbar">
       <div class="nav-brand">
         <h1>SUPER PROMOÇÃO 2025</h1>
@@ -97,11 +97,32 @@ defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 const isScrolled = ref(false)
+const isHidden = ref(false)
 const mobileMenuOpen = ref(false)
 const dropdownOpen = ref(false)
+const lastScrollY = ref(0)
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
+  const currentScrollY = window.scrollY
+  
+  // Definir se está scrolled
+  isScrolled.value = currentScrollY > 50
+  
+  // Lógica para ocultar/mostrar header baseado na direção do scroll
+  if (currentScrollY > 100) { // Só ativa depois de 100px de scroll
+    if (currentScrollY > lastScrollY.value && currentScrollY > 200) {
+      // Scrolling para baixo e já passou de 200px - ocultar
+      isHidden.value = true
+    } else if (currentScrollY < lastScrollY.value) {
+      // Scrolling para cima - mostrar
+      isHidden.value = false
+    }
+  } else {
+    // No topo da página - sempre mostrar
+    isHidden.value = false
+  }
+  
+  lastScrollY.value = currentScrollY
 }
 
 const toggleMobileMenu = () => {
@@ -141,14 +162,19 @@ onUnmounted(() => {
   background: var(--gradient-primary);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   border-bottom: none;
+  transform: translateY(0);
 }
 
 .app-header.scrolled {
   background: rgba(30, 58, 138, 0.95);
   backdrop-filter: blur(15px);
-  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.app-header.hidden {
+  transform: translateY(-100%);
 }
 
 .navbar {
@@ -165,7 +191,7 @@ onUnmounted(() => {
   font-weight: 800;
   color: white;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   line-height: 1.2;
 }
 
@@ -194,6 +220,7 @@ onUnmounted(() => {
   position: relative;
   display: block;
   line-height: 1.2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link::after {
@@ -230,6 +257,7 @@ onUnmounted(() => {
 .nav-link-admin {
   color: #fbbf24 !important;
   font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .nav-link-admin::after {
@@ -264,10 +292,10 @@ onUnmounted(() => {
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(30, 58, 138, 0.98);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(15px);
   border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   padding: 0.5rem 0;
   margin: 0;
   list-style: none;
@@ -277,7 +305,7 @@ onUnmounted(() => {
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1002;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .dropdown-menu.dropdown-open {
@@ -294,6 +322,7 @@ onUnmounted(() => {
   font-size: 0.85rem;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-link:last-child {

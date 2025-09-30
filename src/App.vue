@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
 import BackToTop from './components/BackToTop.vue'
 import AuthModal from './components/AuthModal.vue'
+import WhatsAppButton from './components/WhatsAppButton.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -124,6 +125,9 @@ onUnmounted(() => {
     
     <!-- Back to top apenas na home -->
     <BackToTop v-if="!isAdminPage" />
+
+    <!-- WhatsApp Button -->
+    <WhatsAppButton />
 
     <!-- Modal de Autenticação Global -->
     <AuthModal 
