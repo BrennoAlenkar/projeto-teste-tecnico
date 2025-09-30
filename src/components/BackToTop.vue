@@ -40,10 +40,10 @@ onUnmounted(() => {
 <style scoped>
 .back-to-top {
   position: fixed;
-  bottom: 2rem;
+  bottom: 90px;
   right: 2rem;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: var(--gradient-primary);
   color: white;
   border: none;
@@ -55,7 +55,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   backdrop-filter: blur(10px);
 }
@@ -98,11 +98,11 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .back-to-top {
-    bottom: 1rem;
+    bottom: 70px;
     right: 1rem;
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
   }
 }
 </style>

@@ -273,15 +273,7 @@ onMounted(() => {
   gap: 1rem;
 }
 
-.title-icon {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
-}
+/* .title-icon: Removed bounce animation for better performance */
 
 .section-subtitle {
   text-align: center;
@@ -427,18 +419,9 @@ onMounted(() => {
 
 .faq-answer {
   border-top: 1px solid #eee;
-  animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-  }
+  opacity: 1;
+  max-height: 500px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
 .answer-content {

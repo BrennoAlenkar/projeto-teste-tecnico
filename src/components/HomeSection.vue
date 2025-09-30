@@ -53,22 +53,22 @@
     <div class="campaign-highlights">
       <div class="highlight-grid">
         <div class="highlight-card">
-          <div class="highlight-icon rotating">🎁</div>
+          <div class="highlight-icon">🎁</div>
           <h3>Mais de 1000</h3>
           <p>Prêmios disponíveis</p>
         </div>
         <div class="highlight-card">
-          <div class="highlight-icon rotating">🏪</div>
+          <div class="highlight-icon">🏪</div>
           <h3>500+ Lojas</h3>
           <p>Participantes em todo Brasil</p>
         </div>
         <div class="highlight-card">
-          <div class="highlight-icon rotating">🏆</div>
+          <div class="highlight-icon">🏆</div>
           <h3>R$ 1 Milhão</h3>
           <p>Em prêmios totais</p>
         </div>
         <div class="highlight-card">
-          <div class="highlight-icon rotating">📱</div>
+          <div class="highlight-icon">📱</div>
           <h3>Fácil de</h3>
           <p>Participar pelo app</p>
         </div>
@@ -133,7 +133,8 @@ const scrollToParticipacao = () => {
 
 onMounted(() => {
   updateCountdown()
-  countdownInterval = setInterval(updateCountdown, 1000)
+  // Atualizar apenas a cada 10 segundos para reduzir processamento
+  countdownInterval = setInterval(updateCountdown, 10000)
 })
 
 onUnmounted(() => {
@@ -154,8 +155,6 @@ onUnmounted(() => {
   text-align: center;
   padding: 6rem 2rem 4rem;
   background: linear-gradient(135deg, #434343 0%, #000000 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 8s ease-in-out infinite;
   color: white;
   min-height: 80vh;
   display: flex;
@@ -181,32 +180,22 @@ onUnmounted(() => {
 .floating-prize {
   position: absolute;
   font-size: 3rem;
-  animation: float 6s ease-in-out infinite;
   opacity: 0.7;
 }
 
 .floating-prize:nth-child(1) {
   top: 10%;
   left: 10%;
-  animation-delay: 0s;
 }
 
 .floating-prize:nth-child(2) {
   top: 20%;
   right: 15%;
-  animation-delay: 2s;
 }
 
 .floating-prize:nth-child(3) {
   bottom: 30%;
   left: 20%;
-  animation-delay: 4s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-20px) rotate(5deg); }
-  66% { transform: translateY(10px) rotate(-5deg); }
 }
 
 .hero-content {
@@ -230,18 +219,18 @@ onUnmounted(() => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 3s ease-in-out infinite;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
 }
 
 .year {
   font-size: 5rem;
   color: white;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-@keyframes shimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
 }
 
 .hero-subtitle {
@@ -329,17 +318,17 @@ onUnmounted(() => {
 }
 
 .btn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .pulse-animation {
-  animation: pulse 2s infinite;
+  animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0% { box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3); }
-  50% { box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6), 0 0 0 10px rgba(255, 107, 107, 0.1); }
+  50% { box-shadow: 0 8px 30px rgba(255, 107, 107, 0.5), 0 0 0 5px rgba(255, 107, 107, 0.1); }
   100% { box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3); }
 }
 
@@ -390,20 +379,19 @@ onUnmounted(() => {
   box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
 }
 
+.highlight-card:hover .highlight-icon {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
 .highlight-icon {
   font-size: 3.5rem;
   margin-bottom: 1.5rem;
   display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-.rotating {
-  animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* .rotating: Removed continuous rotation animation for better performance */
 
 .highlight-card h3 {
   font-size: 2rem;

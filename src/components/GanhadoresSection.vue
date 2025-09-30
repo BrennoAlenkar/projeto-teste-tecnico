@@ -342,14 +342,7 @@ onMounted(() => {
   gap: 1rem;
 }
 
-.title-icon {
-  animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* .title-icon: Removed continuous rotation animation for better performance */
 
 .section-subtitle {
   text-align: center;

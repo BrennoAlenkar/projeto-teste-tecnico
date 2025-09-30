@@ -394,8 +394,8 @@ const buscarLocalizacao = async () => {
   carregandoLocalizacao.value = true
   
   try {
-    // Simulação de geolocalização
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    // Simulação de geolocalização (reduced delay for better performance)
+    await new Promise(resolve => setTimeout(resolve, 500))
     
     // Localização de exemplo (São Paulo)
     localizacaoAtual.value = {
@@ -468,11 +468,11 @@ const telefoneLoja = (loja: Loja) => {
 }
 
 onMounted(() => {
-  // Simular carregamento das lojas
+  // Simular carregamento das lojas (optimized for performance)
   carregandoLojas.value = true
   setTimeout(() => {
     carregandoLojas.value = false
-  }, 1000)
+  }, 300)
 })
 </script>
 
@@ -499,15 +499,7 @@ onMounted(() => {
   gap: 1rem;
 }
 
-.title-icon {
-  animation: swing 3s ease-in-out infinite;
-}
-
-@keyframes swing {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  75% { transform: rotate(-10deg); }
-}
+/* .title-icon: Removed swing animation for better performance */
 
 .section-subtitle {
   text-align: center;
@@ -609,7 +601,6 @@ onMounted(() => {
 
 .loja-proxima .marker-icon {
   background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  animation: pulse 2s infinite;
 }
 
 .marker-pulse {
@@ -621,23 +612,7 @@ onMounted(() => {
   height: 30px;
   border-radius: 50%;
   background: rgba(255, 107, 107, 0.3);
-  animation: ripple 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-@keyframes ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
+  opacity: 0.7;
 }
 
 .usuario-marker {

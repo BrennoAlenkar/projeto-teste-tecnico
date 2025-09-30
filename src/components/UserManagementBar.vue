@@ -120,7 +120,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
 interface User {
   id?: string
@@ -242,10 +242,18 @@ const closeDeleteModal = () => {
   userToDelete.value = null
 }
 
+let userReloadInterval: number | null = null
+
 onMounted(() => {
   loadUsers()
-  // Recarregar usuários periodicamente
-  setInterval(loadUsers, 3000)
+  // Recarregar usuários periodicamente (reduced frequency for better performance)
+  userReloadInterval = setInterval(loadUsers, 15000)
+})
+
+onUnmounted(() => {
+  if (userReloadInterval) {
+    clearInterval(userReloadInterval)
+  }
 })
 
 // Watch para mudanças no localStorage

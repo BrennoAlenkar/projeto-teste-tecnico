@@ -236,13 +236,6 @@ const scrollToLojas = () => {
 
 .title-icon {
   font-size: 3.5rem;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
 }
 
 .section-subtitle {
@@ -289,25 +282,18 @@ const scrollToLojas = () => {
 
 .step-card.reveal-active {
   opacity: 1;
+  opacity: 1;
   transform: translateY(0) scale(1);
-  animation: slideInUp 0.6s ease forwards;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .step-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   border-color: var(--accent-mint);
+}
+
+.step-card:hover .step-icon {
+  transform: scale(1.1);
 }
 
 .step-number {
@@ -330,12 +316,7 @@ const scrollToLojas = () => {
 .step-icon {
   font-size: 4rem;
   margin: 1rem 0;
-  animation: pulse 3s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  transition: transform 0.3s ease;
 }
 
 .step-card h3 {
@@ -400,7 +381,6 @@ const scrollToLojas = () => {
 .flow-arrow {
   font-size: 2rem;
   margin: 1rem 0;
-  animation: bounce 2s infinite;
 }
 
 .rules-highlight {

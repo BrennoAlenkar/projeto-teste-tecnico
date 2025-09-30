@@ -149,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 interface User {
   nome: string
@@ -249,10 +249,18 @@ const deleteUser = () => {
   }
 }
 
+let userLoadInterval: number | null = null
+
 onMounted(() => {
   loadUsers()
-  // Recarregar usuários periodicamente
-  setInterval(loadUsers, 2000)
+  // Recarregar usuários periodicamente (reduced frequency for better performance)
+  userLoadInterval = setInterval(loadUsers, 10000)
+})
+
+onUnmounted(() => {
+  if (userLoadInterval) {
+    clearInterval(userLoadInterval)
+  }
 })
 </script>
 
